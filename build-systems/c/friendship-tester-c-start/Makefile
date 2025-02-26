@@ -20,7 +20,7 @@ $(BUILDDIR)/%.o: $(SRCDIR)/%.c
 
 compile: $(TARGET)
 
-clean: 
+clean:
 	rm -rf $(TARGET) $(OBJECTS)
 
 run: $(TARGET)
