@@ -8,7 +8,7 @@ CFILES = $(wildcard $(SRCDIR)/*.c)
 # declareer de corresponderende .o files via subsititutie en renaming
 OBJECTS = $(patsubst $(SRCDIR)/%.c,$(BUILDDIR)/%.o,$(CFILES))
 
-TARGET = friendshipter.bin
+TARGET = friendshiptester.bin
 
 all: $(TARGET)
 
