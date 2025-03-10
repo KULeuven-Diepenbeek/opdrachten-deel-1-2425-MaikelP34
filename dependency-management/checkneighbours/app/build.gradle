@@ -34,3 +34,12 @@ application {
     // Define the main class for the application.
     mainClass = 'be.ses.App'
 }
+
+jar {
+  manifest {
+    attributes(
+      'Main-Class': application.mainClass // dit maakt een verwijzing naar de mainClass eigenschap die je in het application {} blok hebt ingesteld
+    )
+  }
+  archiveBaseName = 'checkneigboursingrid'  // enkel als je de naam van de gegenereerde jar wil wijzigen
+}
