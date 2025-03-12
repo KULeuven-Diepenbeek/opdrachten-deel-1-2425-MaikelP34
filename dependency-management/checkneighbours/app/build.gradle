@@ -16,8 +16,10 @@ repositories {
 }
 
 dependencies {
-    // Use JUnit test framework.
-    testImplementation libs.junit
+    // Use JUnit Jupiter for testing.
+    testImplementation libs.junit.jupiter
+    implementation 'com.google.code.gson:gson:2.12.1'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
     // This dependency is used by the application.
     implementation libs.guava
@@ -35,11 +37,16 @@ application {
     mainClass = 'be.ses.App'
 }
 
+tasks.named('test') {
+    // Use JUnit Platform for unit tests.
+    useJUnitPlatform()
+}
+
 jar {
   manifest {
     attributes(
-      'Main-Class': application.mainClass // dit maakt een verwijzing naar de mainClass eigenschap die je in het application {} blok hebt ingesteld
+      'App': application.mainClass // dit maakt een verwijzing naar de mainClass eigenschap die je in het application {} blok hebt ingesteld
     )
   }
-  archiveBaseName = 'checkneigboursingrid'  // enkel als je de naam van de gegenereerde jar wil wijzigen
+  archiveBaseName = 'CheckNeighboursInGridTest'  // enkel als je de naam van de gegenereerde jar wil wijzigen
 }
