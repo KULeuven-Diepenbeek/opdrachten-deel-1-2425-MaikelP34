@@ -7,40 +7,52 @@ repositories {
 }
 
 dependencies {
+    // Voeg alle JAR-bestanden in de lib-map toe als dependencies
+    implementation fileTree(dir: 'lib', include: ['*.jar'])
+    
+    // JUnit voor testen
     testImplementation 'junit:junit:4.13.2'
+
+    // Google Guava als extra dependency
     implementation 'com.google.guava:guava:30.1.1-jre'
 }
 
 application {
+    // Zorg ervoor dat de mainClass correct is ingesteld
     mainClass = 'be.ses.App'
 }
 
-jar {
-    archiveBaseName.set('checkneighbours')
-    destinationDirectory.set(file("lib")) // JAR wordt in de lib-map geplaatst
-
-    manifest {
-        attributes 'Main-Class': 'be.ses.App'
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(11)) // Pas aan naar jouw Java-versie
     }
 }
 
-// Task om het project te builden en de JAR in 'lib' te plaatsen
-tasks.register('buildJar', Jar) {
-    dependsOn classes
-    archiveBaseName.set('checkneighbours')
-    destinationDirectory.set(file("lib"))
-
-    manifest {
-        attributes 'Main-Class': 'be.ses.App'
+// Zorg dat de standaard Gradle-mappen worden gebruikt voor de broncode
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java']
+        }
     }
-
-    from {
-        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    test {
+        java {
+            srcDirs = ['src/test/java']
+        }
     }
 }
 
-// Task om het project uit te voeren
-tasks.register('runApp', Exec) {
-    dependsOn buildJar
-    commandLine 'java', '-jar', 'lib/checkneighbours.jar'
+// Taak om de code te compileren
+tasks.register('compile', JavaCompile) {
+    source = sourceSets.main.java
+    destinationDirectory = file("$buildDir/compiled-classes")
+    classpath = sourceSets.main.compileClasspath
+}
+
+// Taak om het project te bouwen
+tasks.register('build') {
+    dependsOn 'compile', 'test'
+    doLast {
+        println 'Project succesvol gebouwd!'
+    }
 }
