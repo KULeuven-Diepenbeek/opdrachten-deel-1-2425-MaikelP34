@@ -4,16 +4,9 @@
 package be.ses;
 
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
 
-    // Assuming checkNeighbours is a class and getSameNeighboursIds is a static method
-    public static Iterable<Integer> checkNeighbours(Iterable<Integer> grid, int width, int height, int indexToCheck) {
-        return CheckNeighboursInGrid.getSameNeighboursIds();
-    }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+       System.out.println("Hello World!"); 
     }
 }
