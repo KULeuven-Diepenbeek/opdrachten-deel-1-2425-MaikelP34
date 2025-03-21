@@ -1,1 +1,1 @@
-![CheckNeighbours CI](https://github.com/MaikelP34/opdrachten-deel-1-2425-MaikelP34/actions/workflows/gradle.yml/badge.svg)
+![CheckNeighbours CI](https://github.com/KULeuven-Diepenbeek/opdrachten-deel-1-2425-MaikelP34/actions/workflows/gradle.yml/badge.svg)
